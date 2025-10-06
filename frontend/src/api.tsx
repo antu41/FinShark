@@ -8,7 +8,7 @@ interface SearchResponse {
 export const searchCompanies = async (query: string) => {
   try {
     const data = await axios.get<SearchResponse>(
-      `https://financialmodelingprep.com/stable/search-symbol?query=AAPL&apikey=${
+      `https://financialmodelingprep.com/stable/search-name?query=${query}&apikey=${
         import.meta.env.VITE_API_KEY
       }`
     );

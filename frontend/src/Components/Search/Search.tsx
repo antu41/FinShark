@@ -1,29 +1,21 @@
-import React, {
-  useState,
-  type ChangeEvent,
-  type JSX,
-  type SyntheticEvent,
-} from "react";
+import React, { type ChangeEvent, type JSX, type SyntheticEvent } from "react";
 
-type Props = {};
+interface Props {
+  onSearchSubmit: (e: SyntheticEvent) => void;
+  search: string | undefined;
+  hangleSearchChange: (e: ChangeEvent<HTMLInputElement>) => void;
+}
 
-const Search: React.FC<Props> = (props: Props): JSX.Element => {
-  const [search, setSearch] = useState<string>("");
-
-  const hangleChange = (e: ChangeEvent<HTMLInputElement>) => {
-    setSearch(e.target.value);
-    console.log(e);
-  };
-
-  const onClick = (e: SyntheticEvent) => {
-    console.log(e);
-  };
-  return (
-    <div>
-      <input value={search} onChange={(e) => hangleChange(e)}></input>
-      <button onClick={(e) => onClick(e)} />
-    </div>
-  );
+const Search: React.FC<Props> = ({
+  onSearchSubmit,
+  search,
+  hangleSearchChange,
+}: Props): JSX.Element => {
+  return <>
+  <form onSubmit={onSearchSubmit}>
+    <input value={search} onChange={hangleSearchChange} />
+  </form>
+  </>;
 };
 
 export default Search;

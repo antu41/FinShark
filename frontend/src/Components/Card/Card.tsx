@@ -1,32 +1,35 @@
 import type React from "react";
 import "./Card.css";
-import type { JSX } from "react";
+import type { JSX, SyntheticEvent } from "react";
+import type { CompanySearch } from "../../company";
+import AddPortfolio from "../Portfolio/AddPortfolio/AddPortfolio";
 interface Props {
-  companyName: string;
-  ticker: string;
-  price: number;
+  id: string;
+  searchResult: CompanySearch;
+  onPortfolioCreate?: (e: SyntheticEvent) => void;
 }
 
 const Card: React.FC<Props> = ({
-  companyName,
-  ticker,
-  price,
+  id,
+  searchResult,
+  onPortfolioCreate,
 }: Props): JSX.Element => {
   return (
     <div className="card">
-      <img src="https://via.placeholder.com/150" alt="Image" />
+      <img alt="company logo" />
       <div className="details">
         <h2>
-          {companyName} ({ticker})
+          {searchResult.name} ({searchResult.symbol})
         </h2>
-        <p>${price}</p>
+        <p>${searchResult.currency}</p>
       </div>
       <p className="info">
-        Lorem ipsum dolor sit, amet consectetur adipisicing elit. Suscipit nam
-        iusto, necessitatibus quibusdam unde veritatis explicabo deserunt
-        nesciunt maxime laborum nobis tempore, deleniti doloribus ea quaerat
-        blanditiis placeat ipsum cumque.
+        {searchResult.exchangeShortName} - {searchResult.stockExchange}
       </p>
+      <AddPortfolio
+        onPortfolioCreate={onPortfolioCreate}
+        symbol={searchResult.symbol}
+      />
     </div>
   );
 };
