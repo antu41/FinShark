@@ -2,7 +2,6 @@ import { useState, type ChangeEvent, type SyntheticEvent } from "react";
 import type { CompanySearch } from "../../company";
 import { searchCompanies } from "../../api";
 import CardList from "../../Components/CardList/CardList";
-import Navbar from "../../Components/Navbar/Navbar";
 import ListPortfolio from "../../Components/Portfolio/ListPortfolio/ListPortfolio";
 import Search from "../../Components/Search/Search";
 
@@ -14,7 +13,7 @@ const SearchPage = (props: Props) => {
   const [searchResult, setSearchResult] = useState<CompanySearch[]>([]);
   const [serverError, setServerError] = useState<string | null>(null);
 
-  const hangleSearchChange = (e: ChangeEvent<HTMLInputElement>) => {
+  const handleSearchChange = (e: ChangeEvent<HTMLInputElement>) => {
     setSearch(e.target.value);
     console.log(e);
   };
@@ -50,7 +49,7 @@ const SearchPage = (props: Props) => {
       <Search
         onSearchSubmit={onSearchSubmit}
         search={search}
-        handleSearchChange={hangleSearchChange}
+        handleSearchChange={handleSearchChange}
       />
       <ListPortfolio
         portfolioValues={portfolioValues}

@@ -1,51 +1,38 @@
-import { testIncomeStatementData } from "./testData";
+interface Props {
+  config: any;
+  data: any;
+}
 
-const data = testIncomeStatementData;
-interface Props {}
+const Table = ({ config, data }: Props) => {
+  const renderedHeader = (
+    <tr>
+      {config.map((col: any) => (
+        <th
+          key={col.label}
+          className="p-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+        >
+          {col.label}
+        </th>
+      ))}
+    </tr>
+  );
 
-type Company = (typeof data)[0];
+  const renderedRows = data.map((company: any) => (
+    <tr key={company.cik}>
+      {config.map((col: any) => (
+        <td key={col.label} className="p-3">
+          {col.render(company)}
+        </td>
+      ))}
+    </tr>
+  ));
 
-const configs = [
-  {
-    label: "Year",
-    render: (company: Company) => company.acceptedDate,
-  },
-  {
-    label: "Cost of Revenue",
-    render: (company: Company) => company.costOfRevenue,
-  },
-];
-const Table = (props: Props) => {
-  const renderedRows = data.map((company) => {
-    return (
-      <tr key={company.cik}>
-        {configs.map((val: any) => {
-          return (
-            <td className="p-4 whitespace-nowrap text-sm font-normal text-gray-900">
-              {val.render(company)}
-            </td>
-          );
-        })}
-      </tr>
-    );
-  });
-
-  const renderedHeader = configs.map((config: any) => {
-    return (
-      <th
-        className="p-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
-        key={config.label}
-      >
-        {config.label}
-      </th>
-    );
-  });
   return (
-    <div className="bg-white shadow rounded-lg p-4 sm:p-6 xl:p-8">
-      <thead className="min-w-full divide-y divide-gray-200 m-5">
-        {renderedHeader}
-      </thead>
-      <tbody>{renderedRows}</tbody>
+    <div className="bg-white shadow rounded-lg p-4 sm:p-6 xl:p-8 overflow-x-auto">
+      <table className="min-w-full divide-y divide-gray-200">
+        <thead>{renderedHeader}</thead>
+        <tbody>{renderedRows}</tbody>
+      </table>
     </div>
   );
 };
