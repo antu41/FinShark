@@ -114,7 +114,7 @@ export const getCompData = async (query: string) => {
 export const getTenK = async (query: string) => {
   try {
     const data = await axios.get<CompanyTenK[]>(
-      `https://financialmodelingprep.com/stable/sec-filings?symbol=${query}&type=10-k&apikey=${
+      `https://financialmodelingprep.com/stable/sec-filings-search?symbol=${query}&from=2024-01-01&to=2024-03-01&apikey=${
         import.meta.env.VITE_API_KEY
       }`
     );
