@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace api.Controllers
 {
+    [Authorize]
     [ApiController]
     [Route("api/stock")]
     public class StockController : ControllerBase
@@ -26,8 +27,8 @@ namespace api.Controllers
                 return BadRequest(ModelState);
             var stocks = await _stockRepository.GetAllAsync(query);
 
-            var stockDto = stocks.Select(s => s.ToStockDto());
-            return Ok(stocks);
+            var stockDto = stocks.Select(s => s.ToStockDto()).ToList();
+            return Ok(stockDto);
         }
 
         [HttpGet("{id:int}")]

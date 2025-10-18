@@ -18,25 +18,6 @@ namespace api.Repository
 
         }
 
-        public async Task<List<Stock>> GetUserPortfolio(AppUser appUser)
-        {
-            var portfolioStocks = await _context.Portfolios
-                .Where(p => p.AppUserId == appUser.Id)
-                .Select(p => new Stock
-                {
-                    Id = p.StockId,
-                    Symbol = p.Stock.Symbol,
-                    CompanyName = p.Stock.CompanyName,
-                    Purchase = p.Stock.Purchase,
-                    LastDiv = p.Stock.LastDiv,
-                    Industry = p.Stock.Industry,
-                    MarketCap = p.Stock.MarketCap
-                })
-                .ToListAsync();
-
-            return portfolioStocks;
-        }
-
         public async Task<Portfolio> CreateAsync(Portfolio portfolio)
         {
             await _context.Portfolios.AddAsync(portfolio);
@@ -46,18 +27,31 @@ namespace api.Repository
 
         public async Task<Portfolio> DeletePortfolio(AppUser appUser, string symbol)
         {
-            var portfolioEntry = await _context.Portfolios
-                .Include(p => p.Stock)
-                .FirstOrDefaultAsync(p => p.AppUserId == appUser.Id && p.Stock.Symbol.Equals(symbol, StringComparison.OrdinalIgnoreCase));
+            var portfolioModel = await _context.Portfolios.FirstOrDefaultAsync(x => x.AppUserId == appUser.Id && x.Stock.Symbol.ToLower() == symbol.ToLower());
 
-            if (portfolioEntry == null)
+            if (portfolioModel == null)
             {
-                throw new Exception("Portfolio entry not found");
+                return null;
             }
 
-            _context.Portfolios.Remove(portfolioEntry);
+            _context.Portfolios.Remove(portfolioModel);
             await _context.SaveChangesAsync();
-            return portfolioEntry;
+            return portfolioModel;
+        }
+
+        public async Task<List<Stock>> GetUserPortfolio(AppUser user)
+        {
+            return await _context.Portfolios.Where(u => u.AppUserId == user.Id)
+            .Select(stock => new Stock
+            {
+                Id = stock.StockId,
+                Symbol = stock.Stock.Symbol,
+                CompanyName = stock.Stock.CompanyName,
+                Purchase = stock.Stock.Purchase,
+                LastDiv = stock.Stock.LastDiv,
+                Industry = stock.Stock.Industry,
+                MarketCap = stock.Stock.MarketCap
+            }).ToListAsync();
         }
 
     }
