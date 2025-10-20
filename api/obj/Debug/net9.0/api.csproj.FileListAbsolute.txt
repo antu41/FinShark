@@ -48,6 +48,8 @@ E:\React\FinShark\api\bin\Debug\net9.0\Microsoft.OpenApi.dll
 E:\React\FinShark\api\bin\Debug\net9.0\Mono.TextTemplating.dll
 E:\React\FinShark\api\bin\Debug\net9.0\Newtonsoft.Json.dll
 E:\React\FinShark\api\bin\Debug\net9.0\Newtonsoft.Json.Bson.dll
+E:\React\FinShark\api\bin\Debug\net9.0\Npgsql.dll
+E:\React\FinShark\api\bin\Debug\net9.0\Npgsql.EntityFrameworkCore.PostgreSQL.dll
 E:\React\FinShark\api\bin\Debug\net9.0\Swashbuckle.AspNetCore.Swagger.dll
 E:\React\FinShark\api\bin\Debug\net9.0\Swashbuckle.AspNetCore.SwaggerGen.dll
 E:\React\FinShark\api\bin\Debug\net9.0\Swashbuckle.AspNetCore.SwaggerUI.dll
@@ -148,5 +150,3 @@ E:\React\FinShark\api\obj\Debug\net9.0\refint\api.dll
 E:\React\FinShark\api\obj\Debug\net9.0\api.pdb
 E:\React\FinShark\api\obj\Debug\net9.0\api.genruntimeconfig.cache
 E:\React\FinShark\api\obj\Debug\net9.0\ref\api.dll
-E:\React\FinShark\api\bin\Debug\net9.0\Npgsql.dll
-E:\React\FinShark\api\bin\Debug\net9.0\Npgsql.EntityFrameworkCore.PostgreSQL.dll
