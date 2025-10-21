@@ -22,7 +22,7 @@ namespace api.Repository
 
             if (!string.IsNullOrWhiteSpace(queryObject.symbol))
             {
-                comments = comments.Where(s => s.Stock.Symbol == queryObject.symbol);
+                comments = comments.Where(s => s.Stock.Symbol.ToLower() == queryObject.symbol.ToLower());
             }
 
             if (queryObject.IsDescending == true)
